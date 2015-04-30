@@ -34,7 +34,7 @@
     </div>
 </div>
 <div  class="centered grid__col--8" id="main" style="margin-top: 5%">
-    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V1.3. FISTUDIO&copy;</h1>
+    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V1.4. FISTUDIO&copy;</h1>
     <h3 style="text-align: center">Click "Add" button to add more subject selection forms and then click "Submit".<br/></h3>
     <h5 style="text-align: center"><a href="http://fistudio.net/?p=371" target="_blank">Future Developments and change logs...</a></h5>
 
@@ -74,11 +74,11 @@
                         <h5>
                             Enter your subject
                         </h5>
-                        <input type="text" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off">
+                        <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off">
                         <h5>
                             Enter year
                         </h5>
-                        <input type="text" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input">
+                        <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input">
                         <br>
                     </div>
                 </div>
@@ -95,9 +95,9 @@
             <form id="bform" method="post">
                 <div>
                     <h5>Enter your subjects:</h5>
-                    <input id="bulk_subject" name="bulk_subject" class="form__input" style="width: 100% !important;" />
-                    <h5>Enter years separated by comma(no more than 5!!):</h5>
-                    <input id="bulk_year" name="bulk_year" class="form__input" style="width:100%;" />
+                    <input id="bulk_subject" placeholder="Type a few characters and select a subject" name="bulk_subject" class="form__input" style="width: 100% !important;" />
+                    <h5>Enter years (no more than 5!!):</h5>
+                    <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%;" />
                     <br>
                 </div>
                 <input type="submit" id="submit" name="submit" value="submit">
@@ -118,12 +118,15 @@
 <script>
     //tracking
     setInterval(function(){
-        if ($.cookie("fileLoading")) {
+        if ($.cookie("fileLoaded")) {
             // clean the cookie for future downloads
+            $.removeCookie("fileLoaded");
             $.removeCookie("fileLoading");
-
-            //redirect
-            location.href = "/success.php";
+            //Conceal preloader
+            $('#preloader').fadeOut();
+        }else if($.cookie("fileLoading")){
+            //Reveal preloader
+            $('#preloader').fadeIn();
         }
     },1000);
 
