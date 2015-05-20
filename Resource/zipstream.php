@@ -200,6 +200,7 @@ class ZipStream {
     # add trailing cdr record
     $this->add_cdr($this->opt);
     $this->clear();
+
   }
 
   ###################

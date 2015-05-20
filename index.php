@@ -20,6 +20,8 @@
     <script src="Resource/textext.plugin.tags.js"></script>
     <script src="Resource/textext.plugin.suggestions.js"></script>
     <script src="Resource/textext.plugin.filter.js"></script>
+    <!--Others-->
+    <script src="Resource/jquery.sticky.js"></script>
     <style>
 
     </style>
@@ -38,7 +40,7 @@
     <h3 style="text-align: center">Click "Add" button to add more subject selection forms and then click "Submit".<br/></h3>
     <h5 style="text-align: center"><a href="http://fistudio.net/?p=371" target="_blank">Future Developments and change logs...</a></h5>
 
-    <div align="center" id="buttonsDiv">
+    <div align="center" id="buttonsDiv" style="z-index: 10000" >
         <a class="btn--info" id="addBtn" onclick="addField()">Add</a>
         <a class="btn--warning" id="removeBtn" onclick="removeField()" style="display: none;">Remove</a>
         <a class="btn--error" id="reloadBtn" onclick="reloadWindow()">Reload</a>
@@ -118,15 +120,9 @@
 <script>
     //tracking
     setInterval(function(){
-        if ($.cookie("fileLoaded")) {
-            // clean the cookie for future downloads
-            $.removeCookie("fileLoaded");
-            $.removeCookie("fileLoading");
-            //Conceal preloader
-            $('#preloader').fadeOut();
-        }else if($.cookie("fileLoading")){
-            //Reveal preloader
-            $('#preloader').fadeIn();
+        if($.cookie("fileLoading")){
+            $.removeCookie('fileLoading');
+            window.location.href = "result.php";
         }
     },1000);
 

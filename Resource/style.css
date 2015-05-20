@@ -795,7 +795,3 @@ a hover{
     filter: alpha(opacity=20);
 }
 
-.stick {
-    position: fixed;
-    top: 20px;
-}

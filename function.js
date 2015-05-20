@@ -29,16 +29,9 @@ $(window).load(function(){
         }
     });
     //keep functional buttons floated after scrolling
-    var btnDiv= $('#buttonsDiv');
-    var btnPos = btnDiv.position();
-    $(window).scroll(function (event){
-        var windowPos = $(window).scrollTop();
-        if (windowPos >= btnPos.top()){
-            btnDiv.addClass('stick');
-        }else{
-            btnDiv.removeClass('stick');
-        }
-    });
+    $("#buttonsDiv").sticky({topSpacing:0});
+
+
 });
 // ========== FRONT FORM ==================
 
@@ -354,9 +347,8 @@ $('#download-zip').click(function(e){
         data = analyseTable('table-result-back');
     }
 
-    console.log(JSON.stringify(data));
 
-    // AJAX ACTION (SUSPECTED NOT WORKING)
+
     postResultData(JSON.stringify(data));
 
     e.preventDefault();

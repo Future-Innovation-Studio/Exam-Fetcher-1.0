@@ -25,15 +25,9 @@ if (isset($_POST['downloadLinks'])){
             $downloaded_file = file_get_contents($file);
             //Add to zip
             $zipStream -> add_file($item["key"]."/".basename($file),$downloaded_file);
-
-            // The above code may be buggy -> damage in zip file
-            // Try
-            // $zipStream -> add_file_from_path($item["key"]."/".basename($file),$file);
         }
     }
     $zipStream->finish();
-
-    setcookie('fileLoaded',true,time()+86400,'/');
 
 }
 
