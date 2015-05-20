@@ -63,21 +63,6 @@ class exam_fetcher{
         $pos = strrpos($href,'/')+1;
         $slicedURL = substr($href,$pos,strlen($href)-$pos);
 
-        /* TODO:: BUGGY TITLE GENERATOR
-        //Check if it is assessment report
-        if (strpos($slicedURL,'assess')!==false){
-            $isReport = true;
-        }else {
-            $isReport = false;
-        }
-
-        //Generate output
-        if (!$isReport){
-            $result = $year." ".$subject." exam paper";
-        }else{
-            $result = $year." ".$subject." assessment report";
-        }*/
-
         return $slicedURL;
 
     }

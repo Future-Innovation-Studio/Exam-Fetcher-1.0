@@ -9,13 +9,7 @@
 .text-core .text-wrap textarea,
 .text-core .text-wrap input {
 
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  border: 1px solid #9daccc;
+
   outline: none;
   resize: none;
   position: absolute;
@@ -23,9 +17,8 @@
   background: none;
   overflow: hidden;
   margin: 0;
-  padding: 3px 5px 4px 5px;
   white-space: nowrap;
-  font: 11px "lucida grande", tahoma, verdana, arial, sans-serif;
+  font: 14px "lucida grande", tahoma, verdana, arial, sans-serif;
   line-height: 13px;
   height: auto;
 }

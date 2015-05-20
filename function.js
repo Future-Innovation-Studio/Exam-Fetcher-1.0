@@ -14,7 +14,7 @@ $(window).load(function(){
         trigger:'manual'
     });
     $('#flipSingle').hide();
-    // Links sources
+
     $('#field_div_id_0_subject').autocomplete({
         source:searchIndex
     });
@@ -83,6 +83,10 @@ function addField(){
     //Reveal remove button
     var removeBtn = document.getElementById('removeBtn');
     removeBtn.style.display = "inline";
+
+    //Reveal submit button
+    var submitBtn = document.getElementById('submit');
+    submitBtn.style.display = "inline";
 }
 
 $("#sform").submit(function(e){
@@ -110,6 +114,8 @@ $("#sform").submit(function(e){
             frontTableResult.style.margin = "0 auto";
             frontTableResult.innerHTML += "<thead> <tr> <th>Subject</th> <th>Download Links</th> </tr> </thead>";
 
+            var dlCounter = 0;
+
             $.each(jsonObj,function(key,val){
                 //Create table rows
                 var tr = document.createElement('tr');
@@ -125,9 +131,18 @@ $("#sform").submit(function(e){
                     link.href = vlu;
                     link.innerHTML = idx;
                     link.className = "downloadable";
+                    link.id = "downloadable-front-"+dlCounter;
                     link.setAttribute("target","_blank");
                     tdDownloadLinks.appendChild(link);
-                    tdDownloadLinks.innerHTML += "<br/>";
+                    //Add Print Button
+                    var printBtn = document.createElement('button');
+                    printBtn.innerHTML = "Print this";
+                    printBtn.id = "print-front-"+dlCounter;
+                    tdDownloadLinks.appendChild(printBtn);
+                    printBtn.addEventListener('click',function(){
+                        //TODO::PRINT!
+                    });
+                    dlCounter ++;
 
                     var hiddenLink = document.createElement('a');
                     hiddenLink.href = vlu;
@@ -193,6 +208,7 @@ $('#flipSingle').click(function(){
 });
 
 function removeField(){
+
     if (fieldSet == 1){
         var removeBtn = document.getElementById('removeBtn');
         removeBtn.style.display = "none";
@@ -241,6 +257,9 @@ $('#bform').submit(function(e){
             backTableResult.style.width = "70%";
             backTableResult.style.margin = "0 auto";
             backTableResult.innerHTML += "<thead> <tr> <th>Subject</th> <th>Download Links</th> </tr> </thead>";
+
+            var dlCounter2 = 0;
+
             $.each(jsonObj,function(key,val){
                 //Create table rows
                 var tr = document.createElement('tr');
@@ -250,14 +269,19 @@ $('#bform').submit(function(e){
                 var tdDownloadLinks = document.createElement('td');
                 tdDownloadLinks.style.float = "right";
                 $.each(val,function(idx,vlu){
-
                     var link = document.createElement('a');
                     link.href = vlu;
                     link.innerHTML = idx;
                     link.className = "downloadable";
+                    link.id = "downloadable-back-" + dlCounter2;
                     link.setAttribute("target","_blank");
                     tdDownloadLinks.appendChild(link);
-                    tdDownloadLinks.innerHTML += "<br/>";
+                    //Add Print Button
+                    var printBtn = document.createElement('button');
+                    printBtn.innerHTML = "Print this";
+                    printBtn.id = "print-back-" +dlCounter2;
+                    tdDownloadLinks.appendChild(printBtn);
+                    dlCounter2 ++;
 
                     var hiddenLink = document.createElement('a');
                     hiddenLink.href = vlu;
@@ -338,7 +362,6 @@ $('#download-file').click(function(e){
 
 $('#download-zip').click(function(e){
 
-    //TODO:: Pass data to php and download....
     var table; var data;
 
     if (isFront){
@@ -347,8 +370,10 @@ $('#download-zip').click(function(e){
         data = analyseTable('table-result-back');
     }
 
-
-
+    var dataString = JSON.stringify(data);
+    //Store data for redownload
+    $.cookie('download',dataString);
+    //Post for now
     postResultData(JSON.stringify(data));
 
     e.preventDefault();

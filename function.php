@@ -48,7 +48,7 @@ if (isset($_POST['bulkModeIndicator'])){
 
                             foreach ($tr->find('a') as $examLink){
                                 $url = $exam->getBaseUrl().$examLink->href;
-                                $title = "Download:".$exam->generateTitle($subjectsArray[$i],$yearTitle,$examLink->href);
+                                $title = "Download: ".$exam->generateTitle($subjectsArray[$i],$yearTitle,$examLink->href);
                                 $singleSubjectArray[$title] = $url;
                             }
                         }

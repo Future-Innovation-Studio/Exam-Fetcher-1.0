@@ -37,7 +37,7 @@
 </div>
 <div  class="centered grid__col--8" id="main" style="margin-top: 5%">
     <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V1.4. FISTUDIO&copy;</h1>
-    <h3 style="text-align: center">Click "Add" button to add more subject selection forms and then click "Submit".<br/></h3>
+    <h3 style="text-align: center">We use cookie to enhance your fetching experience.<br/></h3>
     <h5 style="text-align: center"><a href="http://fistudio.net/?p=371" target="_blank">Future Developments and change logs...</a></h5>
 
     <div align="center" id="buttonsDiv" style="z-index: 10000" >
@@ -114,6 +114,8 @@
 
 
 </div>
+
+<iframe id="pdf-preview" name="pdf-preview" style="display: none"></iframe>
 
 <script src="function.js" type="text/javascript"></script>
 <script src="Resource/jquery.cookie.js"></script>

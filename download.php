@@ -20,7 +20,6 @@ if (isset($_POST['downloadLinks'])){
         //Add files
         $filesInDirectory = $item["value"];
         foreach ($filesInDirectory as $file){
-
             //Download file
             $downloaded_file = file_get_contents($file);
             //Add to zip
