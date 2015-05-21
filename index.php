@@ -45,27 +45,24 @@
         <a class="btn--warning" id="removeBtn" onclick="removeField()" style="display: none;">Remove</a>
         <a class="btn--error" id="reloadBtn" onclick="reloadWindow()">Reload</a>
         <a class="btn--default" id="downloadBtn" style="display:none">Download</a>
-
-        <div class="dv_popup" style="display: none;">
-            <div class="popup_header">
-                <h3>Please select a download method</h3>
-                <a class="close" href="#">&times;</a>
-            </div>
-            <div class="body">
-                <p> Download by file: Download the file one by one with the browser downloader(Useful in Single Mode)</p>
-                <p> Download to ZIP: Download a zip file containing all of the retrieved files(Useful in Bulk Mode)</p>
-            </div>
-            <br />
-            <div class="popup_footer">
-                <a class = "btn--default" style="float:left" id="download-file">Download By File</a>
-                <a class = "btn--default" style="float:right" id="download-zip">Download To Zip</a>
-            </div>
-        </div>
-
         <a class="btn--success" id="flipBulk" >Bulk Mode</a>
         <a class="btn--success" id="flipSingle">Single Mode</a>
     </div>
-
+    <div class="dv_popup" style="display: none;">
+        <div class="popup_header">
+            <h3>Please select a download method</h3>
+            <a class="close" href="#">&times;</a>
+        </div>
+        <div class="body">
+            <p> Download by file: Download the file one by one with the browser downloader(Useful in Single Mode)</p>
+            <p> Download to ZIP: Download a zip file containing all of the retrieved files(Useful in Bulk Mode)</p>
+        </div>
+        <br />
+        <div class="popup_footer">
+            <a class = "btn--default" style="float:left" id="download-file">Download By File</a>
+            <a class = "btn--default" style="float:right" id="download-zip">Download To Zip</a>
+        </div>
+    </div>
     <div id="flipable">
 
         <div class="front" id="front">
@@ -125,6 +122,36 @@
         if($.cookie("fileLoading")){
             $.removeCookie('fileLoading');
             window.location.href = "result.php";
+        }
+        if($.cookie("fileAdded")){
+            var dataURL = $.cookie("fileAdded");
+            $.removeCookie("fileAdded");
+            var iframe = document.getElementById('pdf-preview');
+            iframe.setAttribute('src', dataURL);
+
+            iframe.onload = function(){
+                iframe.focus();
+                iframe.contentWindow.print();
+
+                //Go back to view history
+                window.history.back();
+
+                //Delete files on server with ajax
+                $.ajax({
+                    url:'download2.php',
+                    type: "POST",
+                    data:{
+                        action:"delete"
+                    },
+                    success:function(){
+                        console.log("deleted");
+                    },
+                    error:function(){
+                        console.log("failed to delete");
+                    }
+                });
+            }
+
         }
     },1000);
 

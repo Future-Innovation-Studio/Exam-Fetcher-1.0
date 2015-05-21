@@ -101,7 +101,6 @@ $("#sform").submit(function(e){
         type: "POST",
         data: postData,
         success:function(data){
-
             // Remove fields
             var div = document.getElementById('front');
             div.innerHTML = "<h3>Here are the files that are retrieved. Tap one of them or download them all using the button at the <a href='#'><b>TOP</b></a> of the page <br/> To reset, click the reload button in your browser </h3></br>";
@@ -138,11 +137,12 @@ $("#sform").submit(function(e){
                     var printBtn = document.createElement('button');
                     printBtn.innerHTML = "Print this";
                     printBtn.id = "print-front-"+dlCounter;
-                    tdDownloadLinks.appendChild(printBtn);
                     printBtn.addEventListener('click',function(){
-                        //TODO::PRINT!
+                        postAddToServer(vlu,idx);
                     });
+                    tdDownloadLinks.appendChild(printBtn);
                     dlCounter ++;
+                    tdDownloadLinks.innerHTML += "<br/>";
 
                     var hiddenLink = document.createElement('a');
                     hiddenLink.href = vlu;
@@ -164,7 +164,6 @@ $("#sform").submit(function(e){
             downloadBtn.style.display = "inline";
 
             alert("success");
-
 
             // Append style
             var style = "<style type='text/css'>" + "table{background:#fff;border-radius:3px;border-collapse:collapse;height:50px;margin:auto;max-width:600px;padding:5px;width:80%;box-shadow:0 5px 10px rgba(0,0,0,0.1);animation:float 5s infinite}th{color:#D5DDE5;background:#1b1e24;border-bottom:4px solid #9ea7af;border-right:1px solid #343a45;font-size:23px;font-weight:100;padding:24px;text-align:left;text-shadow:0 1px 1px rgba(0,0,0,0.1);vertical-align:middle}th:first-child{border-top-left-radius:3px}th:last-child{border-top-right-radius:3px;border-right:none}tr{border-top:1px solid #C1C3D1;border-bottom-:1px solid #C1C3D1;color:#666B85;font-size:16px;font-weight:400;text-shadow:0 1px 1px rgba(256,256,256,0.1)}tr:first-child{border-top:none}tr:last-child{border-bottom:none}tr:nth-child(odd) td{background:#EBEBEB}tr:last-child td:first-child{border-bottom-left-radius:3px}tr:last-child td:last-child{border-bottom-right-radius:3px}td{background:#FFF;padding:20px;text-align:left;vertical-align:middle;font-weight:300;font-size:18px;text-shadow:-1px -1px 1px rgba(0,0,0,0.1);border-right:1px solid #C1C3D1}td:last-child{border-right:0}"+"</style>";
@@ -280,8 +279,13 @@ $('#bform').submit(function(e){
                     var printBtn = document.createElement('button');
                     printBtn.innerHTML = "Print this";
                     printBtn.id = "print-back-" +dlCounter2;
+                    printBtn.addEventListener('click',function(){
+                        postAddToServer(vlu,idx);
+
+                    });
                     tdDownloadLinks.appendChild(printBtn);
                     dlCounter2 ++;
+                    tdDownloadLinks.innerHTML += "<br/>";
 
                     var hiddenLink = document.createElement('a');
                     hiddenLink.href = vlu;
@@ -422,4 +426,30 @@ function postResultData (val) {
     theForm.submit();
 }
 
+function postAddToServer(url,fileName){
+    var theForm;
+    theForm = document.createElement('form');
+    theForm.action = 'download2.php';
+    theForm.method = 'post';
+    //URL input
+    var newInput1 = document.createElement('input');
+    newInput1.type = 'hidden';
+    newInput1.name = 'addFileToServer_url';
+    newInput1.value = url;
+    //Filename input
+    var newInput2 = document.createElement('input');
+    newInput2.type = 'hidden';
+    newInput2.name = 'addFileToServer_filename';
+    newInput2.value = fileName;
+    //Add elements
+    theForm.appendChild(newInput1);
+    theForm.appendChild(newInput2);
+    //Add to dom
+    document.body.appendChild(theForm);
 
+    console.log(newInput1.value);
+    console.log(newInput2.value);
+
+    //Submit
+    theForm.submit();
+}

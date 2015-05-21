@@ -154,3 +154,4 @@ function stringToArray($str){
 
     return $result;
 }
+
