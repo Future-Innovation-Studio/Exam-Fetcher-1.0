@@ -137,11 +137,10 @@ $("#sform").submit(function(e){
                     var printBtn = document.createElement('button');
                     printBtn.innerHTML = "Print this";
                     printBtn.id = "print-front-"+dlCounter;
-                    printBtn.addEventListener('click',function(){
-                        postAddToServer(vlu,idx);
-                    });
+                    printBtn.onclick = function(){postAddToServer(vlu,idx)};
                     tdDownloadLinks.appendChild(printBtn);
                     dlCounter ++;
+
                     tdDownloadLinks.innerHTML += "<br/>";
 
                     var hiddenLink = document.createElement('a');
