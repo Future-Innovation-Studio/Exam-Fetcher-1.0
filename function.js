@@ -172,6 +172,8 @@ $("#sform").submit(function(e){
             $('#addBtn').fadeOut();
             $('#removeBtn').fadeOut();
 
+            //Append Alert
+            appendAlert("front");
         },
         error:function(){
             $('#preloader').fadeOut();
@@ -312,6 +314,10 @@ $('#bform').submit(function(e){
             alert("success");
 
             $('#preloader').fadeOut();
+
+            //Append alert
+            appendAlert("back");
+
         },
         error: function (data) {
             $('#preloader').fadeOut();
@@ -451,4 +457,13 @@ function postAddToServer(url,fileName){
 
     //Submit
     theForm.submit();
+}
+
+function appendAlert(tableID){
+    var alert = document.createElement('div');
+    alert.className = "alert alert-danger";
+    alert.setAttribute('role',"alert");
+    alert.innerHTML = "THE PRINGTING FUNCTION IS NOT WORKING ATM! TRYING HARD TO SOLVE IT...";
+    var parentDiv = document.getElementById(tableID);
+    parentDiv.appendChild(alert);
 }

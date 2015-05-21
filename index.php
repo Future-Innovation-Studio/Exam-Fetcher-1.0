@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="Resource/textext.core.css"/>
     <link rel="stylesheet" href="Resource/textext.plugin.autocomplete.css"/>
     <link rel="stylesheet" href="Resource/textext.plugin.tags.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+
     <script src="Resource/textext.core.js"></script>
     <script src="Resource/textext.plugin.autocomplete.js"></script>
     <script src="Resource/textext.plugin.tags.js"></script>
@@ -22,6 +24,7 @@
     <script src="Resource/textext.plugin.filter.js"></script>
     <!--Others-->
     <script src="Resource/jquery.sticky.js"></script>
+
     <style>
 
     </style>
@@ -66,6 +69,7 @@
     <div id="flipable">
 
         <div class="front" id="front">
+
             <form id="sform" method="post">
 
                 <div id="container">
@@ -91,6 +95,7 @@
         </div>
 
         <div class="back" id="back">
+
             <form id="bform" method="post">
                 <div>
                     <h5>Enter your subjects:</h5>
